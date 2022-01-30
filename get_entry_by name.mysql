@@ -1,0 +1,12 @@
+create or replace function get_eggs_by_name(_name text) 
+returns setof eggs
+language sql
+as $$
+
+
+  select * 
+  from eggs
+  where to_tsvector(name) @@ to_tsquery(_name);
+$$;
+
+
